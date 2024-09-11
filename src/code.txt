@@ -1,0 +1,32 @@
+# const axios = require('axios'); // For downloading the image
+# const sharp = require('sharp'); // For image processing
+# const fs = require('fs');       // For saving the compressed image
+
+# // Function to compress image from URL
+# async function compressImageFromURL(imageUrl, outputFilePath, quality = 80) {
+#   try {
+#     // Step 1: Download the image from the URL using axios
+#     const response = await axios({
+#       url: imageUrl,
+#       method: 'GET',
+#       responseType: 'arraybuffer', // Get the image data as a buffer
+#     });
+    
+#     const imageBuffer = Buffer.from(response.data, 'binary'); // Create a buffer from the downloaded data
+
+#     // Step 2: Use sharp to compress the image
+#     await sharp(imageBuffer)
+#       .jpeg({ quality: quality })  // Compress image to JPEG with the specified quality (80 by default)
+#       .toFile(outputFilePath);     // Save the compressed image to a file
+
+#     console.log('Image compressed and saved to:', outputFilePath);
+#   } catch (error) {
+#     console.error('Error during image compression:', error);
+#   }
+# }
+
+# // Usage example
+# const imageUrl = 'https://example.com/path-to-image.jpg'; // Replace with the actual image URL
+# const outputFilePath = './compressed-image.jpg'; // Output file path where compressed image will be saved
+
+# compressImageFromURL(imageUrl, outputFilePath, 70); // Compress with 70% quality
