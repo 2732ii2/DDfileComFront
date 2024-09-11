@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import img1 from "./screenshot.jpeg";
 import './App.css';
 import {toast, Toaster} from "react-hot-toast";
 import { useEffect, useState } from 'react';
@@ -142,6 +143,7 @@ function App() {
   setrespdata(resp?.data?.data);
   }
   const [show,setshow]=useState(false);
+  const [showhint,setshowhint]=useState(false);
   return (
     <div className="App relative flex w-[100%] h-[100vh] bg-[rgba(80,0,0,.1)] flex-col items-center  ">
 
@@ -162,7 +164,12 @@ Unique Id :
  {respdata && <JSONToCSV data={respdata}/>}
   
   
-    </>: <> <p className="absolute bg-[white] right-[20px] pb-1 text-black w-[20px] h-[20px] top-[10px] rounded-[50%]">i</p>
+    </>: <> <p onMouseLeave={()=>  setshowhint(!showhint) } onMouseEnter={()=>  setshowhint(!showhint) } className="absolute bg-[white] cursor-pointer right-[20px] pb-1 text-black w-[20px] h-[20px] top-[10px] rounded-[50%]">i</p>
+
+         {showhint && <div className="w-[150px] h-[150px] -right-[50px] flex flex-col bg-black absolute">
+            <h2 className="text-white spec text-[20px]">file should be in this format *</h2>
+           <div className="flex gap-2  text-white text-[14px]">Serial No | Product Name | Input Image Urls</div>
+          </div>}
           <div className={`w-[200px] relative flex-col flex justify-center items-center h-[40px] ${file?"":"bg-black"}`}>
        {file? <div className="border-[1px] relative border-black w-[100%] h-[100%] flex items-center justify-center">{file.name}
 
